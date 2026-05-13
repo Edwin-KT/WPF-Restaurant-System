@@ -1,4 +1,4 @@
-﻿namespace ViaEuropa.Data.Models
+﻿namespace ViaEurope.Data.Models
 {
     public class Order
     {
