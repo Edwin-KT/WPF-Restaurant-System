@@ -15,17 +15,17 @@ namespace ViaEurope.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
-        public ViaEuropaContext(DbContextOptions<ViaEuropaContext> options)
+        public ViaEuropeContext(DbContextOptions<ViaEuropeContext> options)
             : base(options) { }
 
-        public ViaEuropaContext() { }
+        public ViaEuropeContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                    "Server=.;Database=ViaEuropaDB;Trusted_Connection=True;TrustServerCertificate=True;"
+                    "Server=.;Database=ViaEuropeDB;Trusted_Connection=True;TrustServerCertificate=True;"
                 );
             }
         }
