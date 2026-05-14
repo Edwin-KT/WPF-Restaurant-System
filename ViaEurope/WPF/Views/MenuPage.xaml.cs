@@ -1,25 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ViaEurope.Data.Models;
+using ViaEurope.WPF.Services;
+using ViaEurope.WPF.ViewModels;
 
 namespace ViaEurope.WPF.Views
 {
-    /// <summary>
-    /// Interaction logic for MenuPage.xaml
-    /// </summary>
     public partial class MenuPage : Page
     {
-        
+        private readonly MenuViewModel _vm;
+
+        public MenuPage()
+        {
+            InitializeComponent();
+            _vm = (MenuViewModel)DataContext;
+            Loaded += async (s, e) => await _vm.LoadMenuAsync();
+        }
+
+
+        private void BtnAddToCart_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Dish dish)
+            {
+                CartService.Instance.AddDish(dish);
+                MessageBox.Show($"✅ {dish.Name} adăugat în coș!",
+                    "Coș", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

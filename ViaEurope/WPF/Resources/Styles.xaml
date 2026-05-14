@@ -113,5 +113,6 @@
 	<!-- Converters -->
 	<conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 	<conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
+	<conv:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
 	<BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 </ResourceDictionary>
