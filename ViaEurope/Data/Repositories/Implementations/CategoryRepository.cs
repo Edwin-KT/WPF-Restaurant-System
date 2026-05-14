@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ViaEurope.Data;
 using ViaEurope.Data.Models;
 using ViaEurope.Data.Repositories.Interfaces;
 
-namespace ViaEurope.Data.Repositories.Implementations
+namespace Data.Repositories.Implementations
 {
     public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {

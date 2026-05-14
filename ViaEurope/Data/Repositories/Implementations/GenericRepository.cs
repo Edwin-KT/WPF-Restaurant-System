@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ViaEurope.Data;
 using ViaEurope.Data.Repositories.Interfaces;
 
-namespace ViaEurope.Data.Repositories.Implementations
+namespace Data.Repositories.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
