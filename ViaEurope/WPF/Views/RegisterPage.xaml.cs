@@ -1,28 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ViaEurope.WPF.ViewModels;
 
-namespace WPF.Views
+namespace ViaEurope.WPF.Views
 {
-    /// <summary>
-    /// Interaction logic for RegisterPage.xaml
-    /// </summary>
     public partial class RegisterPage : Page
     {
+        private readonly RegisterViewModel _vm;
+
         public RegisterPage()
         {
             InitializeComponent();
+            _vm = (RegisterViewModel)DataContext;
+            _vm.OnRegisterSuccess = () =>
+                Dispatcher.Invoke(() => NavigationService?.Navigate(new LoginPage()));
         }
+
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+            => await _vm.RegisterAsync(PbPassword.Password, PbConfirm.Password);
+
+        private void BtnGoLogin_Click(object sender, RoutedEventArgs e)
+            => NavigationService?.Navigate(new LoginPage());
     }
 }

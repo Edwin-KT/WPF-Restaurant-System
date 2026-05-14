@@ -2,7 +2,7 @@
 using System.Windows.Controls.Primitives;
 using ViaEurope.Business.Services;
 using ViaEurope.WPF.Services;
-using WPF.Views;
+using ViaEurope.WPF.Views;
 
 namespace ViaEurope.WPF
 {
@@ -26,6 +26,9 @@ namespace ViaEurope.WPF
             MainFrame.Navigate(new MenuPage());
         }
 
+        public void NavigateToMenuPublic()
+            => MainFrame.Navigate(new MenuPage());
+
         private void BtnMenu_Click(object sender, RoutedEventArgs e)
             => NavigateToMenu();
 
@@ -47,6 +50,7 @@ namespace ViaEurope.WPF
             UpdateNavBar();
             NavigateToMenu();
         }
+
 
         public void UpdateNavBar()
         {

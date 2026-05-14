@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ViaEurope.WPF.ViewModels;
+using WPF.Views;
 
-namespace WPF.Views
+namespace ViaEurope.WPF.Views
 {
-    /// <summary>
-    /// Interaction logic for LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
+        private readonly LoginViewModel _vm;
+
         public LoginPage()
         {
             InitializeComponent();
+            _vm = (LoginViewModel)DataContext;
+            _vm.OnLoginSuccess = _ =>
+            {
+                var main = (MainWindow)Application.Current.MainWindow!;
+                main.UpdateNavBar();
+                main.NavigateToMenuPublic();
+            };
         }
+
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
+            => await _vm.LoginAsync(PbPassword.Password);
+
+        private void BtnGoRegister_Click(object sender, RoutedEventArgs e)
+            => NavigationService?.Navigate(new RegisterPage());
     }
 }

@@ -13,16 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF.Views
+namespace ViaEurope.WPF.Views
 {
     /// <summary>
     /// Interaction logic for OrdersPage.xaml
     /// </summary>
     public partial class OrdersPage : Page
     {
-        public OrdersPage()
-        {
-            InitializeComponent();
-        }
+        
     }
 }

@@ -13,16 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF.Views
+namespace ViaEurope.WPF.Views
 {
     /// <summary>
     /// Interaction logic for EmployeePage.xaml
     /// </summary>
     public partial class EmployeePage : Page
     {
-        public EmployeePage()
-        {
-            InitializeComponent();
-        }
+        
     }
 }

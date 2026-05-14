@@ -13,16 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF.Views
+namespace ViaEurope.WPF.Views
 {
     /// <summary>
     /// Interaction logic for MenuPage.xaml
     /// </summary>
     public partial class MenuPage : Page
     {
-        public MenuPage()
-        {
-            InitializeComponent();
-        }
+        
     }
 }
