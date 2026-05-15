@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using ViaEurope.WPF.ViewModels;
-using WPF.Views;
 
 namespace ViaEurope.WPF.Views
 {

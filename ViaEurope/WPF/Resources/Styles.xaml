@@ -115,4 +115,5 @@
 	<conv:InverseBoolConverter x:Key="InverseBoolConverter"/>
 	<conv:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
 	<BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+	<conv:BoolToColorConverter x:Key="BoolToColorConverter"/>
 </ResourceDictionary>
