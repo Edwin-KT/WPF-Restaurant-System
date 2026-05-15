@@ -72,9 +72,9 @@
                                                            Foreground="#1a1a2e"/>
 												<TextBlock FontSize="12"
                                                            Foreground="#888">
-                                                    <Run Text="{Binding Quantity}"/>
+                                                    <Run Text="{Binding Mode=OneWay, Path= Quantity}"/>
                                                     <Run Text="×"/>
-                                                    <Run Text="{Binding UnitPrice,
+                                                    <Run Text="{Binding Mode=OneWay, Path= UnitPrice,
                                                         StringFormat={}{0:0.00}}"/>
                                                     <Run Text="lei"/>
 												</TextBlock>
@@ -85,7 +85,7 @@
                                                        FontWeight="Bold"
                                                        Foreground="#e94560"
                                                        Margin="12,0">
-                                                <Run Text="{Binding Total,
+                                                <Run Text="{Binding Mode=OneWay, Path= Total,
                                                     StringFormat={}{0:0.00}}"/>
                                                 <Run Text=" lei"/>
 											</TextBlock>
@@ -116,7 +116,7 @@
 							<TextBlock Text="Subtotal:" Foreground="#555"/>
 							<TextBlock HorizontalAlignment="Right"
                                        Foreground="#555">
-                                <Run Text="{Binding CartViewModel.Total,
+                                <Run Text="{Binding Mode=OneWay, Path= CartViewModel.Total,
                                     StringFormat={}{0:0.00}}"/>
                                 <Run Text=" lei"/>
 							</TextBlock>
@@ -125,7 +125,7 @@
 							<TextBlock Text="Transport:" Foreground="#555"/>
 							<TextBlock HorizontalAlignment="Right"
                                        Foreground="#555">
-                                <Run Text="{Binding CartViewModel.DeliveryCost,
+                                <Run Text="{Binding Mode=OneWay, Path= CartViewModel.DeliveryCost,
                                     StringFormat={}{0:0.00}}"/>
                                 <Run Text=" lei"/>
 							</TextBlock>
@@ -137,7 +137,7 @@
 							<TextBlock HorizontalAlignment="Right"
                                        FontWeight="Bold" FontSize="16"
                                        Foreground="#e94560">
-                                <Run Text="{Binding CartViewModel.GrandTotal,
+                                <Run Text="{Binding Mode=OneWay, Path= CartViewModel.GrandTotal,
                                     StringFormat={}{0:0.00}}"/>
                                 <Run Text=" lei"/>
 							</TextBlock>
@@ -246,13 +246,13 @@
                                                 Margin="0,0,0,8">
 										<TextBlock Foreground="#888" FontSize="12">
                                             <Run Text="📅"/>
-                                            <Run Text="{Binding OrderDate,
+                                            <Run Text="{Binding Mode=OneWay, Path= OrderDate,
                                                 StringFormat={}{0:dd MMM yyyy HH:mm}}"/>
 										</TextBlock>
 										<TextBlock Foreground="#888" FontSize="12"
                                                    Margin="16,0,0,0">
                                             <Run Text="🕐 Livrare est.:"/>
-                                            <Run Text="{Binding EstimatedDelivery,
+                                            <Run Text="{Binding Mode=OneWay, Path= EstimatedDelivery,
                                                 StringFormat={}{0:HH:mm}}"/>
 										</TextBlock>
 									</StackPanel>
@@ -267,9 +267,9 @@
                                                            Foreground="#555"
                                                            Margin="0,2">
                                                     <Run Text="•"/>
-                                                    <Run Text="{Binding Quantity}"/>
+                                                    <Run Text="{Binding Mode=OneWay, Path= Quantity}"/>
                                                     <Run Text="×"/>
-                                                    <Run Text="{Binding Dish.Name}"/>
+                                                    <Run Text="{Binding Mode=OneWay, Path= Dish.Name}"/>
 												</TextBlock>
 											</DataTemplate>
 										</ItemsControl.ItemTemplate>
@@ -280,20 +280,20 @@
 										<StackPanel Orientation="Horizontal">
 											<TextBlock FontSize="12" Foreground="#888">
                                                 <Run Text="Mâncare:"/>
-                                                <Run Text="{Binding FoodCost,
+                                                <Run Text="{Binding Mode=OneWay, Path= FoodCost,
                                                     StringFormat={}{0:0.00}}"/>
                                                 <Run Text="lei"/>
 											</TextBlock>
 											<TextBlock FontSize="12" Foreground="#888"
                                                        Margin="12,0">
                                                 <Run Text="Transport:"/>
-                                                <Run Text="{Binding TransportCost,
+                                                <Run Text="{Binding Mode=OneWay, Path= TransportCost,
                                                     StringFormat={}{0:0.00}}"/>
                                                 <Run Text="lei"/>
 											</TextBlock>
 											<TextBlock FontSize="12" Foreground="#888">
                                                 <Run Text="Discount:"/>
-                                                <Run Text="{Binding DiscountAmount,
+                                                <Run Text="{Binding Mode=OneWay, Path= DiscountAmount,
                                                     StringFormat={}{0:0.00}}"/>
                                                 <Run Text="lei"/>
 											</TextBlock>
@@ -302,7 +302,7 @@
                                                    FontWeight="Bold"
                                                    Foreground="#e94560">
                                             <Run Text="Total:"/>
-                                            <Run Text="{Binding TotalCost,
+                                            <Run Text="{Binding Mode=OneWay, Path= TotalCost,
                                                 StringFormat={}{0:0.00}}"/>
                                             <Run Text="lei"/>
 										</TextBlock>
