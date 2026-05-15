@@ -41,6 +41,9 @@ namespace ViaEurope.WPF
         private void BtnOrders_Click(object sender, RoutedEventArgs e)
             => MainFrame.Navigate(new OrdersPage());
 
+        private void BtnCart_Click(object sender, RoutedEventArgs e)
+    => MainFrame.Navigate(new OrdersPage());
+
         private void BtnEmployee_Click(object sender, RoutedEventArgs e)
             => MainFrame.Navigate(new EmployeePage());
 
@@ -63,9 +66,17 @@ namespace ViaEurope.WPF
             BtnLogout.Visibility = isAuth ? Visibility.Visible : Visibility.Collapsed;
             BtnOrders.Visibility = isClient ? Visibility.Visible : Visibility.Collapsed;
             BtnEmployee.Visibility = isEmployee ? Visibility.Visible : Visibility.Collapsed;
+            BtnCart.Visibility = isClient ? Visibility.Visible : Visibility.Collapsed;
+            UpdateCartCount();
             TxtUser.Text = isAuth
                 ? $"👤 {AuthService.CurrentUser!.FirstName}"
                 : string.Empty;
+        }
+
+        public void UpdateCartCount()
+        {
+            var count = CartService.Instance.Items.Sum(i => i.Quantity);
+            BtnCart.Content = $"🛒 {count}";
         }
     }
 }

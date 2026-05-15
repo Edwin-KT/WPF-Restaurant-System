@@ -23,8 +23,10 @@ namespace ViaEurope.WPF.Views
             if (sender is Button btn && btn.Tag is Dish dish)
             {
                 CartService.Instance.AddDish(dish);
+                if (Application.Current.MainWindow is MainWindow main)
+                    main.UpdateCartCount();
                 MessageBox.Show($"✅ {dish.Name} adăugat în coș!",
-                    "Coș", MessageBoxButton.OK, MessageBoxImage.Information);
+                "Coș", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

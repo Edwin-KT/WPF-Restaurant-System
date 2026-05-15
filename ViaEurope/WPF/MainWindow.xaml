@@ -40,6 +40,10 @@
 					<Button x:Name="BtnOrders" Content="Comenzile mele"
                             Click="BtnOrders_Click" Visibility="Collapsed" Margin="4,0"
                             Style="{StaticResource NavButtonStyle}"/>
+					<Button x:Name="BtnCart" Content="🛒 0"
+							Click="BtnCart_Click" Margin="4,0"
+							Visibility="Collapsed"
+							Style="{StaticResource NavButtonStyle}"/>
 					<Button x:Name="BtnEmployee" Content="Panou angajat"
                             Click="BtnEmployee_Click" Visibility="Collapsed" Margin="4,0"
                             Style="{StaticResource NavButtonStyle}"/>
