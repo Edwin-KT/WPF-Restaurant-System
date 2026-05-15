@@ -29,5 +29,26 @@ namespace ViaEurope.WPF.Views
                 "Coș", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+        private void BtnAddMenuToCart_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Data.Models.Menu menu)
+            {
+                var price = ServiceLocator.Instance.MenuService.CalculateMenuPrice(menu);
+                CartService.Instance.AddMenu(menu, price);
+                if (Application.Current.MainWindow is MainWindow main)
+                    main.UpdateCartCount();
+                MessageBox.Show($"✅ {menu.Name} adăugat în coș!\nPreț: {price:0.00} lei",
+                    "Coș", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void TxtMenuPrice_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBlock tb && tb.Tag is Data.Models.Menu menu)
+            {
+                var price = ServiceLocator.Instance.MenuService.CalculateMenuPrice(menu);
+                tb.Text = $"{price:0.00} lei";
+            }
+        }
     }
 }

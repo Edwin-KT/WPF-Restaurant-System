@@ -1,16 +1,35 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using ViaEurope.Data.Models;
 
 namespace ViaEurope.WPF.Services
 {
-    public class CartItem
+    public class CartItem : INotifyPropertyChanged
     {
+        private int _quantity;
+
         public Dish? Dish { get; set; }
         public Menu? Menu { get; set; }
-        public int Quantity { get; set; }
+
+        public int Quantity
+        {
+            get => _quantity;
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Total));
+            }
+        }
+
         public decimal UnitPrice { get; set; }
         public string Name => Dish?.Name ?? Menu?.Name ?? string.Empty;
         public decimal Total => Quantity * UnitPrice;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 
     public class CartService

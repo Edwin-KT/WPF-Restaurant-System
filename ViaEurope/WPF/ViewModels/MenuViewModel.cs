@@ -102,13 +102,17 @@ namespace ViaEurope.WPF.ViewModels
                 else
                     dishes = await _menuService.SearchByKeywordAsync(SearchText, MustContain);
 
-                // Grupam rezultatele pe categorii
                 var grouped = dishes
                     .GroupBy(d => d.Category)
                     .Select(g =>
                     {
-                        var cat = g.Key;
-                        cat.Dishes = g.ToList();
+                        var cat = new Category
+                        {
+                            CategoryId = g.Key.CategoryId,
+                            Name = g.Key.Name,
+                            Description = g.Key.Description,
+                            Dishes = g.ToList()
+                        };
                         return cat;
                     });
 
