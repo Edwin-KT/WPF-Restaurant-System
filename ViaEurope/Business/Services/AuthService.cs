@@ -46,7 +46,7 @@ namespace ViaEurope.Business.Services
                 Role = "Client"
             };
 
-            await _userRepo.AddAsync(user);
+            await _userRepo.InsertUserSpAsync(user);
             return (true, string.Empty);
         }
 

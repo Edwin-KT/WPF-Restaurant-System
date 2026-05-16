@@ -47,5 +47,12 @@ namespace ViaEurope.Data.Repositories.Implementations
                     && o.Status == "Livrata"
                     && o.OrderDate >= DateTime.Now.AddDays(-days))
                 .CountAsync();
+        public async Task UpdateOrderStatusSpAsync(int orderId, string newStatus)
+        {
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC sp_UpdateOrderStatus @OrderId = {0}, @NewStatus = {1}", orderId, newStatus);
+        }
     }
+
+
 }

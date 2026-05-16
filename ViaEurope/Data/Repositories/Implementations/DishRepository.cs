@@ -1,5 +1,7 @@
 ﻿using Data.Repositories.Implementations;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ViaEurope.Data.Models;
 using ViaEurope.Data.Repositories.Interfaces;
 
@@ -16,62 +18,38 @@ namespace ViaEurope.Data.Repositories.Implementations
                 .Include(d => d.Photos)
                 .ToListAsync();
 
+        // ---- APEL PROCEDURI SELECT ----
         public async Task<IEnumerable<Dish>> SearchByKeywordAsync(string keyword, bool mustContain)
-            => mustContain
-                ? await _context.Dishes
-                    .Include(d => d.Category).Include(d => d.Allergens).Include(d => d.Photos)
-                    .Where(d => d.Name.Contains(keyword))
-                    .ToListAsync()
-                : await _context.Dishes
-                    .Include(d => d.Category).Include(d => d.Allergens).Include(d => d.Photos)
-                    .Where(d => !d.Name.Contains(keyword))
-                    .ToListAsync();
+        {
+            return await _context.Dishes
+                .FromSqlRaw("EXEC sp_SearchDishesByKeyword @Keyword = {0}, @MustContain = {1}", keyword, mustContain)
+                .Include(d => d.Category)
+                .Include(d => d.Allergens)
+                .Include(d => d.Photos)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Dish>> SearchByAllergenAsync(string allergen, bool mustContain)
-            => mustContain
-                ? await _context.Dishes
-                    .Include(d => d.Category).Include(d => d.Allergens).Include(d => d.Photos)
-                    .Where(d => d.Allergens.Any(a => a.Name.Contains(allergen)))
-                    .ToListAsync()
-                : await _context.Dishes
-                    .Include(d => d.Category).Include(d => d.Allergens).Include(d => d.Photos)
-                    .Where(d => !d.Allergens.Any(a => a.Name.Contains(allergen)))
-                    .ToListAsync();
+        {
+            return await _context.Dishes
+                .FromSqlRaw("EXEC sp_SearchDishesByAllergen @AllergenName = {0}, @MustContain = {1}", allergen, mustContain)
+                .Include(d => d.Category)
+                .Include(d => d.Allergens)
+                .Include(d => d.Photos)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Dish>> GetLowStockAsync(decimal threshold)
-            => await _context.Dishes
-                .Where(d => d.TotalQuantity <= threshold)
-                .OrderBy(d => d.TotalQuantity)
+        {
+            return await _context.Dishes
+                .FromSqlRaw("EXEC sp_GetLowStockDishes @Threshold = {0}", threshold)
                 .ToListAsync();
+        }
 
         public async Task UpdateQuantityAfterDeliveryAsync(int orderId)
         {
-            // Preparate comandate direct
-            var directItems = await _context.OrderItems
-                .Include(oi => oi.Dish)
-                .Where(oi => oi.OrderId == orderId && oi.DishId != null)
-                .ToListAsync();
-
-            foreach (var item in directItems)
-            {
-                item.Dish!.TotalQuantity -= item.Quantity * item.Dish.PortionQuantity;
-            }
-
-            // Preparate din meniuri
-            var menuItems = await _context.OrderItems
-                .Include(oi => oi.Menu).ThenInclude(m => m!.MenuDishes).ThenInclude(md => md.Dish)
-                .Where(oi => oi.OrderId == orderId && oi.MenuId != null)
-                .ToListAsync();
-
-            foreach (var item in menuItems)
-            {
-                foreach (var menuDish in item.Menu!.MenuDishes)
-                {
-                    menuDish.Dish.TotalQuantity -= item.Quantity * menuDish.PortionQuantity;
-                }
-            }
-
-            await _context.SaveChangesAsync();
+            await _context.Database.ExecuteSqlRawAsync(
+                "EXEC sp_UpdateDishQuantityAfterDelivery @OrderId = {0}", orderId);
         }
     }
 }

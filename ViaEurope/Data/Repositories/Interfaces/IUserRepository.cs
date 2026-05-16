@@ -6,5 +6,6 @@ namespace ViaEurope.Data.Repositories.Interfaces
     {
         Task<User?> GetByEmailAsync(string email);
         Task<bool> EmailExistsAsync(string email);
+        Task InsertUserSpAsync(User user);
     }
 }

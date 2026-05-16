@@ -68,14 +68,12 @@ namespace ViaEurope.Business.Services
 
         public async Task UpdateStatusAsync(int orderId, string newStatus)
         {
-            var order = await _orderRepo.GetByIdAsync(orderId);
-            if (order == null) return;
-
-            order.Status = newStatus;
-            await _orderRepo.UpdateAsync(order);
+            await _orderRepo.UpdateOrderStatusSpAsync(orderId, newStatus);
 
             if (newStatus == "Livrata")
+            {
                 await _dishRepo.UpdateQuantityAfterDeliveryAsync(orderId);
+            }
         }
 
         public async Task CancelOrderAsync(int orderId)

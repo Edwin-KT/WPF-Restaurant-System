@@ -9,5 +9,6 @@ namespace ViaEurope.Data.Repositories.Interfaces
         Task<IEnumerable<Order>> GetActiveOrdersAsync();
         Task<Order?> GetWithDetailsByIdAsync(int orderId);
         Task<int> CountRecentOrdersByUserAsync(int userId, int days);
+        Task UpdateOrderStatusSpAsync(int orderId, string newStatus);
     }
 }
