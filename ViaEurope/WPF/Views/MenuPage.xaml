@@ -123,27 +123,25 @@
 														</Grid.ColumnDefinitions>
 
 														<StackPanel Grid.Column="0">
-															<!-- Nume + tara -->
 															<StackPanel Orientation="Horizontal">
 																<TextBlock Text="{Binding Name}"
-                                                                           FontSize="16"
-                                                                           FontWeight="SemiBold"
-                                                                           Foreground="#1a1a2e"/>
+																			   FontSize="16"
+																			   FontWeight="SemiBold"
+																			   Foreground="#1a1a2e"/>
 																<Border Background="#e8f4fd"
-                                                                        CornerRadius="4"
-                                                                        Padding="6,2"
-                                                                        Margin="10,0,0,0"
-                                                                        VerticalAlignment="Center">
+																			CornerRadius="4"
+																			Padding="6,2"
+																			Margin="10,0,0,0"
+																			VerticalAlignment="Center">
 																	<TextBlock Text="{Binding CountryOfOrigin}"
-                                                                               FontSize="11"
-                                                                               Foreground="#2980b9"/>
+																				   FontSize="11"
+																				   Foreground="#2980b9"/>
 																</Border>
-																<!-- Indisponibil badge -->
 																<Border Background="#fde8e8"
-                                                                        CornerRadius="4"
-                                                                        Padding="6,2"
-                                                                        Margin="8,0,0,0"
-                                                                        VerticalAlignment="Center">
+																			CornerRadius="4"
+																			Padding="6,2"
+																			Margin="8,0,0,0"
+																			VerticalAlignment="Center">
 																	<Border.Style>
 																		<Style TargetType="Border">
 																			<Setter Property="Visibility" Value="Collapsed"/>
@@ -155,34 +153,28 @@
 																		</Style>
 																	</Border.Style>
 																	<TextBlock Text="Indisponibil"
-                                                                               FontSize="11"
-                                                                               Foreground="#e94560"
-                                                                               FontWeight="SemiBold"/>
+																			   FontSize="11"
+																			   Foreground="#e94560"
+																			   FontWeight="SemiBold"/>
 																</Border>
 															</StackPanel>
 
-															<!-- Descriere -->
 															<TextBlock Text="{Binding Description}"
-                                                                       FontSize="12"
-                                                                       Foreground="#888"
-                                                                       Margin="0,4,0,6"
-                                                                       TextWrapping="Wrap"/>
+																	   FontSize="12"
+																	   Foreground="#888"
+																	   Margin="0,4,0,6"
+																	   TextWrapping="Wrap"/>
 
-															<!-- Cantitate portie -->
 															<StackPanel Orientation="Horizontal">
-																<TextBlock Text="⚖️ "
-                                                                           FontSize="12"/>
-																<TextBlock FontSize="12"
-                                                                           Foreground="#555">
-                                                                    <Run Text="{Binding PortionQuantity, StringFormat={}{0:0}##}"/>
-                                                                    <Run Text="{Binding PortionUnit}"/>
-                                                                    <Run Text="/ porție"/>
+																<TextBlock Text="⚖️ " FontSize="12"/>
+																<TextBlock FontSize="12" Foreground="#555">
+																	<Run Text="{Binding PortionQuantity, StringFormat={}{0:0}##}"/>
+																	<Run Text="{Binding PortionUnit}"/>
+																	<Run Text="/ porție"/>
 																</TextBlock>
 															</StackPanel>
 
-															<!-- Alergeni -->
-															<ItemsControl ItemsSource="{Binding Allergens}"
-                                                                          Margin="0,6,0,0">
+															<ItemsControl ItemsSource="{Binding Allergens}" Margin="0,6,0,0">
 																<ItemsControl.ItemsPanel>
 																	<ItemsPanelTemplate>
 																		<WrapPanel/>
@@ -190,43 +182,52 @@
 																</ItemsControl.ItemsPanel>
 																<ItemsControl.ItemTemplate>
 																	<DataTemplate>
-																		<Border Background="#fff3cd"
-                                                                                CornerRadius="4"
-                                                                                Padding="6,2"
-                                                                                Margin="0,0,4,4">
-																			<TextBlock Text="{Binding Name}"
-                                                                                       FontSize="10"
-                                                                                       Foreground="#856404"/>
+																		<Border Background="#fff3cd" CornerRadius="4" Padding="6,2" Margin="0,0,4,4">
+																			<TextBlock Text="{Binding Name}" FontSize="10" Foreground="#856404"/>
 																		</Border>
 																	</DataTemplate>
 																</ItemsControl.ItemTemplate>
 															</ItemsControl>
-														</StackPanel>
 
-														<!-- Pret + buton -->
+															<ItemsControl ItemsSource="{Binding Photos}" Margin="0,12,0,0">
+																<ItemsControl.ItemsPanel>
+																	<ItemsPanelTemplate>
+																		<WrapPanel/>
+																	</ItemsPanelTemplate>
+																</ItemsControl.ItemsPanel>
+																<ItemsControl.ItemTemplate>
+																	<DataTemplate>
+																		<Border CornerRadius="8" Margin="0,0,8,8" 
+																				BorderBrush="#ddd" BorderThickness="1" 
+																				ClipToBounds="True" Width="80" Height="80"
+																				Background="#fafafa">
+																			<Image Source="{Binding PhotoPath}" Stretch="UniformToFill"/>
+																		</Border>
+																	</DataTemplate>
+																</ItemsControl.ItemTemplate>
+															</ItemsControl>
+
+														</StackPanel>
 														<StackPanel Grid.Column="1"
-                                                                    VerticalAlignment="Center"
-                                                                    HorizontalAlignment="Right"
-                                                                    MinWidth="120">
+															VerticalAlignment="Center"
+															HorizontalAlignment="Right"
+															MinWidth="120">
 															<TextBlock FontSize="22"
-                                                                       FontWeight="Bold"
-                                                                       Foreground="#e94560"
-                                                                       HorizontalAlignment="Right">
-                                                                <Run Text="{Binding Price, StringFormat={}{0:0.00}}"/>
-                                                                <Run Text=" lei"/>
+																	   FontWeight="Bold"
+																	   Foreground="#e94560"
+																	   HorizontalAlignment="Right">
+																<Run Text="{Binding Price, StringFormat={}{0:0.00}}"/>
+																<Run Text=" lei"/>
 															</TextBlock>
 															<Button Content="+ Adaugă"
 																	Margin="0,8,0,0"
 																	Tag="{Binding}"
 																	Click="BtnAddToCart_Click">
 																<Button.Style>
-																	<Style TargetType="Button"
-																			BasedOn="{StaticResource PrimaryButtonStyle}">
+																	<Style TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
 																		<Setter Property="Visibility" Value="Collapsed"/>
 																		<Style.Triggers>
-																			<DataTrigger Binding="{Binding DataContext.IsClient,
-																				RelativeSource={RelativeSource AncestorType=Page}}"
-																				Value="True">
+																			<DataTrigger Binding="{Binding DataContext.IsClient, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
 																				<Setter Property="Visibility" Value="Visible"/>
 																			</DataTrigger>
 																		</Style.Triggers>
